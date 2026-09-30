@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drone tiles viewer</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<aside>
+  <h1 id="title">Drone tiles</h1>
+  <p class="sub" id="place">loading…</p>
+
+  <section>
+    <h2>Zoom</h2>
+    <div class="zoom-now"><b id="z">–</b><span>of 14–22</span></div>
+    <p class="res" id="res"></p>
+    <div class="ladder" id="ladder"></div>
+    <p class="hint">Solid = real detail from the image. Dashed = beyond the image's native resolution (upsampled).</p>
+  </section>
+
+  <section>
+    <h2>Background</h2>
+    <div class="seg" id="basemaps">
+      <button data-b="street" class="on">Street</button>
+      <button data-b="satellite">Satellite</button>
+      <button data-b="none">None</button>
+    </div>
+    <label class="row" for="opacity">Drone image opacity <b id="opv" style="margin-left:auto">100%</b></label>
+    <input type="range" id="opacity" min="0" max="100" value="100">
+    <label class="row"><input type="checkbox" id="swipe"> Compare with satellite (swipe)</label>
+    <label class="row"><input type="checkbox" id="grid"> Show tile grid (z/x/y)</label>
+  </section>
+
+
+  <section>
+    <h2>Click on the map to</h2>
+    <div class="seg" id="tools">
+      <button data-t="pixel" class="on">Read pixel</button>
+      <button data-t="distance">Distance</button>
+      <button data-t="area">Area</button>
+    </div>
+    <div class="result" id="result"></div>
+    <button class="link" id="clear" hidden>Clear measurement</button>
+  </section>
+
+  <section>
+    <h2>Input vs COG</h2>
+    <table id="compare"></table>
+  </section>
+
+  <section>
+    <h2>Tiles per zoom</h2>
+    <div class="bars" id="bars"></div>
+    <p class="total" id="total"></p>
+  </section>
+
+  <section>
+    <p class="hint" id="credits"></p>
+  </section>
+</aside>
+
+<div id="mapwrap">
+  <div id="map"></div>
+  <div id="divider"><span class="side-tag l">Drone</span><span class="side-tag r">Satellite</span><div id="handle">⇔</div></div>
+  <button id="fit">Zoom to image</button>
+  <div id="coords"></div>
+  <div id="error"><div><h2>Couldn't load meta.json</h2><p>Run the pipeline first, then open this page through the web server (http://localhost:8080), not as a file.</p></div></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+services:
+  tiler:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data:ro
+      - ./output:/app/output
+    environment:
+      - MIN_ZOOM=14
+      - MAX_ZOOM=22
